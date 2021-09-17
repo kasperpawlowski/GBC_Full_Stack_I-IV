@@ -1,6 +1,4 @@
 const events = require('events');
-const { emit } = require('process');
-
 const eventEmitter = new events.EventEmitter();
 
 const alarmHandler = () => {
