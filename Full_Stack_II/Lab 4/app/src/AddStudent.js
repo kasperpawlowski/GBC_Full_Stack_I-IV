@@ -20,7 +20,7 @@ class AddStudent extends React.Component {
         axios.post('https://jsonplaceholder.typicode.com/users', this.state)
              .then(resp => {
                  console.log(resp.data);
-                 this.props.addUserHandler();
+                 this.props.addUserHandler(resp.data);
              });
     }
 

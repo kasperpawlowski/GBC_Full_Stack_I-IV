@@ -12,32 +12,28 @@ class UserList extends React.Component {
         this.handleDeleteUser = this.handleDeleteUser.bind(this);
     }
 
-    getUsers() {
-        axios.get(`https://jsonplaceholder.typicode.com/users`).then(res => {
-            this.setState(() => ({users: res.data}));
-        });
+    handleAddUser(user) {
+        this.setState(state => ({users: [...state.users, user]}));
     }
 
-    handleAddUser() {
-        this.getUsers();
-    }
-
-    handleDeleteUser() {
-        this.getUsers();
+    handleDeleteUser(id) {
+        this.setState(state => ({users: state.users.filter(user => user.id !== id)}));
     }
 
     componentDidMount() {
-        this.getUsers();
+        axios.get(`https://jsonplaceholder.typicode.com/users`).then(res => {
+            this.setState(() => ({users: res.data}));
+        });
     }
 
     render() { 
         return <>
                     <AddStudent addUserHandler={this.handleAddUser}/>
                     <ul>
-                    {this.state.users.map((user, id) => (
-                        <li key={id}>
+                    {this.state.users.map((user, i) => (
+                        <li key={i}>
                             {user.name}
-                            <DeleteStudent id={id+1} deleteUserHandler={this.handleDeleteUser}/>
+                            <DeleteStudent id={user.id} deleteUserHandler={this.handleDeleteUser}/>
                         </li>))}
                     </ul>
                </>

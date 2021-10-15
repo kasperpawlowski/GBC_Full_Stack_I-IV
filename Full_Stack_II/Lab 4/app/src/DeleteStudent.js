@@ -13,7 +13,7 @@ class DeleteStudent extends React.Component {
         axios.delete(`https://jsonplaceholder.typicode.com/users/${this.props.id}`)
              .then(resp => {
                  console.log(resp);
-                 this.props.deleteUserHandler();
+                 this.props.deleteUserHandler(this.props.id);
              });
     }
 
